@@ -1,12 +1,29 @@
+import AuthLayout from './_auth/AuthLayout';
+import SigninForm from './_auth/forms/SigninForm';
+import SignupForm from './_auth/forms/SignupForm';
+import RootLayout from './_root/RootLayout';
+import { Home } from './_root/pages';
 import './globals.css';
-import React from 'react';
+import {Routes,Route} from "react-router-dom";
 
 const App = () => {
-return(
-  <h1 className="text-3xl text-white font-bold underline">
-    Hello World!
-  </h1>
-)
+    return(
+        <main className='flex h-screen'>
+          <Routes>
+            {/* public - sign up and sing */}
+            <Route element= {<AuthLayout/>}>
+                    <Route path="/sign-up" element={<SignupForm />} />
+                    <Route path="/sign-in" element={<SigninForm />} />
+            </Route>
+            
+
+            {/* private - Home after signin*/ }
+            <Route element= {<RootLayout/>}>
+                <Route index element={<Home />} />
+            </Route>
+          </Routes>
+        </main>
+    )
 }
 
 export default App
